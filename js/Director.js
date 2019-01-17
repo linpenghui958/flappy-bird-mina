@@ -14,6 +14,9 @@ export class Director{
 
   run() {
     const backgroundSprite = this.dataStore.get('background')
+    const landSprite = this.dataStore.get('land')
     backgroundSprite.draw()
+    landSprite.draw()
+    requestAnimationFrame(() => this.run())
   }
 }
