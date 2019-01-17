@@ -1,8 +1,11 @@
 import { Sprite } from '../base/Sprite.js'
+import { DataStore } from '../base/DataStore.js'
 export class BackGround extends Sprite{
-  constructor(ctx, image) {
+  constructor() {
+    // const image = DataStore.getInstance().res.get('background')
+    const image = Sprite.getImage('background')
+    console.log(image)
     super(
-      ctx,
       image,
       0,0,
       image.width, image.height,

@@ -1,17 +1,25 @@
 import { ResourceLoad } from './js/base/ResourceLoad.js'
 import { Director } from './js/Director.js'
 import { BackGround } from './js/runtime/BackGround.js'
+import { DataStore } from './js/base/DataStore.js'
 export class Main{
   constructor() {
     this.canvas = document.querySelector('#game')
     this.ctx = this.canvas.getContext('2d')
-
+    this.dataStore = DataStore.getInstance()
     const loader = ResourceLoad.createLoader()
-    loader.onload(map => this.loadedFirst(map))
+    loader.onload(map => this.onResourceFirstLoaded(map))
   }
 
-  loadedFirst(map) {
-    let background = new BackGround(this.ctx, map.get('background'))
-    background.draw()
+  onResourceFirstLoaded(map) {
+    this.dataStore.ctx = this.ctx
+    this.dataStore.res = map
+    this.init()
+  }
+
+  init() {
+    this.dataStore
+          .put('background', BackGround)
+    new Director().run()
   }
 }
