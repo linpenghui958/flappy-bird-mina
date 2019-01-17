@@ -17,6 +17,8 @@ export class Director{
     const landSprite = this.dataStore.get('land')
     backgroundSprite.draw()
     landSprite.draw()
-    requestAnimationFrame(() => this.run())
+    let timer = requestAnimationFrame(() => this.run())
+    this.dataStore.put('timer', timer)
+    // cancelAnimationFrame(this.dataStore.get('timer'))
   }
 }
