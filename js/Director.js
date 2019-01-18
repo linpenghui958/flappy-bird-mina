@@ -23,28 +23,35 @@ export class Director{
   }
 
   run() {
-    const backgroundSprite = this.dataStore.get('background')
-    const landSprite = this.dataStore.get('land')
-    const pencils = this.dataStore.get('pencils')
-    backgroundSprite.draw()
-    pencils.forEach((item) => {
-      item.draw()
-    })
-    landSprite.draw()
-
-
-    if(pencils[0].x + pencils[0].width <= 0 && pencils.length === 4) {
-      pencils.shift()
-      pencils.shift()
+  
+    if (!this.isGameOver) {
+      const backgroundSprite = this.dataStore.get('background')
+      const landSprite = this.dataStore.get('land')
+      const pencils = this.dataStore.get('pencils')
+      backgroundSprite.draw()
+      pencils.forEach((item) => {
+        item.draw()
+      })
+      landSprite.draw()
+  
+  
+      if(pencils[0].x + pencils[0].width <= 0 && pencils.length === 4) {
+        pencils.shift()
+        pencils.shift()
+      }
+  
+      const HALF_WIDTH = (DataStore.getInstance().canvas.width - pencils[0].width) / 2
+      if(pencils[0].x < HALF_WIDTH && pencils.length === 2) {
+        this.createPencil()
+      }
+  
+      let timer = requestAnimationFrame(() => this.run())
+      this.dataStore.put('timer', timer)
+    } else {
+      console.log('GAME OVER')
+      cancelAnimationFrame(this.dataStore.get('timer'))
+      this.dataStore.destory()
     }
-
-    const HALF_WIDTH = (DataStore.getInstance().canvas.width - pencils[0].width) / 2
-    if(pencils[0].x < HALF_WIDTH && pencils.length === 2) {
-      this.createPencil()
-    }
-
-    let timer = requestAnimationFrame(() => this.run())
-    this.dataStore.put('timer', timer)
-    // cancelAnimationFrame(this.dataStore.get('timer'))
+    
   }
 }

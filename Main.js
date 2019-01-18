@@ -21,11 +21,12 @@ export class Main{
   }
 
   init() {
+    this.director.isGameOver = false
     this.dataStore
           .put('pencils', [])
           .put('background', BackGround)
           .put('land', Land)
     this.director.createPencil()
-    new Director().run()
+    this.director.run()
   }
 }
