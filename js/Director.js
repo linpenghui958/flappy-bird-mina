@@ -22,12 +22,22 @@ export class Director{
     this.dataStore.get('pencils').push(new DownPencil(top))
   }
 
+  birdsEvent() {
+    const Birds = this.dataStore.get('birds')
+    console.log(Birds.y)
+    for (let i = 0; i <= 2; i++) {
+      Birds.y[i] = Birds.birdY[i]
+    }
+    Birds.time = 0
+  }
+
   run() {
   
     if (!this.isGameOver) {
       const backgroundSprite = this.dataStore.get('background')
       const landSprite = this.dataStore.get('land')
       const pencils = this.dataStore.get('pencils')
+      const birds = this.dataStore.get('birds')
       backgroundSprite.draw()
       pencils.forEach((item) => {
         item.draw()
@@ -44,6 +54,7 @@ export class Director{
       if(pencils[0].x < HALF_WIDTH && pencils.length === 2) {
         this.createPencil()
       }
+      birds.draw()
   
       let timer = requestAnimationFrame(() => this.run())
       this.dataStore.put('timer', timer)
