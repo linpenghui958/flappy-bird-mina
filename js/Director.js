@@ -52,6 +52,7 @@ export class Director{
     const birds = this.dataStore.get('birds')
     const land = this.dataStore.get('land')
     const pencils = this.dataStore.get('pencils')
+    const score = this.dataStore.get('score')
     if (birds.birdY[0] + birds.birdHeight[0] >= land.y){
       console.log('game over')
       this.isGameOver = true
@@ -78,6 +79,11 @@ export class Director{
         this.isGameOver = true
       }
     }
+    // 加分逻辑
+    if (birds.birdY[0] > pencils[0].x + pencils[0].width && score.isScore) {
+      score.isScore = false
+      score.scoreNumber++
+    }
 
   }
 
@@ -88,6 +94,7 @@ export class Director{
       const landSprite = this.dataStore.get('land')
       const pencils = this.dataStore.get('pencils')
       const birds = this.dataStore.get('birds')
+      const score = this.dataStore.get('score')
       backgroundSprite.draw()
       pencils.forEach((item) => {
         item.draw()
@@ -98,6 +105,7 @@ export class Director{
       if(pencils[0].x + pencils[0].width <= 0 && pencils.length === 4) {
         pencils.shift()
         pencils.shift()
+        this.dataStore.get('score').isScore = true
       }
   
       const HALF_WIDTH = (DataStore.getInstance().canvas.width - pencils[0].width) / 2
@@ -105,6 +113,7 @@ export class Director{
         this.createPencil()
       }
       birds.draw()
+      score.draw()
   
       let timer = requestAnimationFrame(() => this.run())
       this.dataStore.put('timer', timer)
