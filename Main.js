@@ -8,7 +8,7 @@ import { StartButton } from './js/player/StartButton.js'
 import { Score } from './js/player/Score.js'
 export class Main{
   constructor() {
-    this.canvas = document.querySelector('#game')
+    this.canvas = wx.createCanvas()
     this.ctx = this.canvas.getContext('2d')
     this.dataStore = DataStore.getInstance()
     this.director = Director.getInstance()
@@ -38,11 +38,19 @@ export class Main{
   }
 
   registerEvent() {
-    this.canvas.addEventListener('touchstart', (e) => {
-      console.log('touch', this)
-      e.preventDefault()
+    // this.canvas.addEventListener('touchstart', (e) => {
+    //   console.log('touch', this)
+    //   e.preventDefault()
+    //   if (this.director.isGameOver) {
+    //     // this.init()
+    //   } else {
+    //     this.director.birdsEvent()
+    //   }
+    // })
+
+    wx.onTouchStart(() => {
       if (this.director.isGameOver) {
-        // this.init()
+        this.init()
       } else {
         this.director.birdsEvent()
       }
