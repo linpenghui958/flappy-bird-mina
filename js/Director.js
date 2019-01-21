@@ -61,7 +61,7 @@ export class Director{
       top: birds.birdY[0],
       bottom: birds.birdY[0] + birds.birdHeight[0],
       left: birds.birdX[0],
-      right: birds.birdX[0]
+      right: birds.birdX[0] + birds.birdWidth[0]
     }
 
     const length = pencils.length
@@ -110,6 +110,8 @@ export class Director{
       this.dataStore.put('timer', timer)
     } else {
       console.log('GAME OVER')
+      console.log(this.dataStore.get('startButton'))
+      this.dataStore.get('startButton').draw()
       cancelAnimationFrame(this.dataStore.get('timer'))
       this.dataStore.destory()
     }
