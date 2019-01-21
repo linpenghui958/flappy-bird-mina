@@ -4,7 +4,6 @@ export class BackGround extends Sprite{
   constructor() {
     // const image = DataStore.getInstance().res.get('background')
     const image = Sprite.getImage('background')
-    console.log(image)
     super(
       image,
       0,0,

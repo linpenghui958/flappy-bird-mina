@@ -39,7 +39,7 @@ export class Main{
       e.preventDefault()
       if (this.director.isGameOver) {
         console.log('game over')
-        this.init()
+        // this.init()
       } else {
         this.director.birdsEvent()
       }

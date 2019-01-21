@@ -3,7 +3,6 @@ import { UpPencil } from './runtime/UpPencil.js';
 import { DownPencil } from './runtime/DownPencil.js';
 export class Director{
   constructor() {
-    console.log('init Director')
     this.dataStore = DataStore.getInstance()
   }
 
@@ -30,9 +29,60 @@ export class Director{
     }
     Birds.time = 0
   }
+  
+  /**
+   * @return \{{{boolean}}\} {{是否撞击}}{{}}
+   * @param  birds边框模型
+   * @param  pencil边框模型
+   */
+  isStrike(b, p) {
+    let r = false
+    if (b.top > p.bottom ||
+      b.bottom < p.top ||
+      b.right < p.left ||
+      b.left > p.right
+    ) {
+        r = true;
+    }  
+    return !r
+  }
+
+  // 判断小鸟是否撞击地板
+  check() {
+    const birds = this.dataStore.get('birds')
+    const land = this.dataStore.get('land')
+    const pencils = this.dataStore.get('pencils')
+    if (birds.birdY[0] + birds.birdHeight[0] >= land.y){
+      console.log('game over')
+      this.isGameOver = true
+    }
+
+    const birdBorder = {
+      top: birds.birdY[0],
+      bottom: birds.birdY[0] + birds.birdHeight[0],
+      left: birds.birdX[0],
+      right: birds.birdX[0]
+    }
+
+    const length = pencils.length
+    for (let i = 0; i < length; i++) {
+      const p = pencils[i]
+      const pencilBorder = {
+        top: p.y,
+        bottom: p.y + p.height,
+        left: p.x,
+        right: p.x + p.width
+      }
+      if (this.isStrike(birdBorder, pencilBorder)) {
+        console.log('撞到水管啦');
+        this.isGameOver = true
+      }
+    }
+
+  }
 
   run() {
-  
+    this.check()
     if (!this.isGameOver) {
       const backgroundSprite = this.dataStore.get('background')
       const landSprite = this.dataStore.get('land')
