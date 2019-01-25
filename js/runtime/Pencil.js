@@ -8,7 +8,7 @@ export class Pencil extends Sprite{
       0,0,
       image.width, image.height,
       // 在屏幕最右侧绘制
-      DataStore.getInstance().canvas.width, 0,
+      window.innerWidth, 0,
       image.width, image.height
     )
     this.top = top

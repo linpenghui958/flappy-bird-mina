@@ -9,7 +9,7 @@ export class DownPencil extends Pencil{
   }
 
   draw() {
-    let gap = DataStore.getInstance().canvas.height / 5;
+    let gap = window.innerHeight / 5;
     this.y = this.top + gap;
     super.draw()
   }

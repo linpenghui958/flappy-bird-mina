@@ -9,7 +9,7 @@ export class Land extends Sprite{
       0,0,
       img.width,
       img.height,
-      0, DataStore.getInstance().canvas.height - img.height,
+      0, window.innerHeight - img.height,
       img.width,
       img.height,
     )
@@ -19,7 +19,7 @@ export class Land extends Sprite{
 
   draw() {
     this.landX += this.landSpeed
-    if (this.landX >= this.img.width - DataStore.getInstance().canvas.width) {
+    if (this.landX >= this.img.width - window.innerWidth) {
       this.landX = 0 
     }
     super.draw(

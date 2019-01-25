@@ -20,9 +20,9 @@ export class Birds extends Sprite{
     this.clippingY = [10, 10, 10]
     this.clippingWidth = [34, 34, 34]
     this.clippingHeight = [24, 24, 24]
-    const birdX = DataStore.getInstance().canvas.width / 4
+    const birdX = window.innerWidth / 4
     this.birdX = [birdX, birdX, birdX]
-    const birdY = DataStore.getInstance().canvas.height / 2
+    const birdY = window.innerHeight / 2
     this.birdY = [birdY, birdY, birdY]
     const birdWidth = 34
     const birdHeight = 24

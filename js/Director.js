@@ -14,8 +14,8 @@ export class Director{
   }
 
   createPencil() {
-    const minTop = DataStore.getInstance().canvas.height / 8
-    const maxTop = DataStore.getInstance().canvas.width / 2
+    const minTop = window.innerHeight / 8
+    const maxTop = window.innerWidth / 2
     const top = minTop + Math.random() * (maxTop - minTop)
     this.dataStore.get('pencils').push(new UpPencil(top))
     this.dataStore.get('pencils').push(new DownPencil(top))
@@ -108,7 +108,7 @@ export class Director{
         this.dataStore.get('score').isScore = true
       }
   
-      const HALF_WIDTH = (DataStore.getInstance().canvas.width - pencils[0].width) / 2
+      const HALF_WIDTH = (window.innerWidth - pencils[0].width) / 2
       if(pencils[0].x < HALF_WIDTH && pencils.length === 2) {
         this.createPencil()
       }

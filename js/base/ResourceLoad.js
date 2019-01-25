@@ -4,7 +4,7 @@ export class ResourceLoad{
   constructor() {
     this.map = new Map(Resource)
     for (let [key, value] of this.map) {
-      const image = wx.createImage()
+      const image = new Image()
       image.src = value
       this.map.set(key, image)
     }
